@@ -1,9 +1,17 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark  d-flex" :class="{ 'fixed-top': isFixedTop }">
-      <button class="navbar-toggler mx-2" type="button" data-toggle="collapse" data-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="toggleMenu">
-        <i class='bx bx-menu'></i>
+    <nav class="navbar navbar-expand-lg navbar-dark d-flex" :class="{ 'fixed-top': isFixedTop }">
+      <button
+          class="navbar-toggler mx-2 mx-sm-5"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          @click="toggleMenu"
+      >
+        <i class="bx bx-menu"></i>
       </button>
       <div class="mx-5">
         <a href="/">
@@ -13,10 +21,13 @@
       <div class="collapse navbar-collapse mx-5 flex-row-reverse" :class="{ 'show': isMenuOpen }">
         <ul class="navbar-nav ml-auto text-start justify-content-center text-center">
           <li :class="{ 'nav-item': true, 'active': $route.path === '/characterList' }">
-            <router-link class="nav-link" to="/characterList">Lista de personajes</router-link>
+            <router-link class="nav-link" to="/characterList" @click.native="closeMenu">Lista de personajes</router-link>
           </li>
           <li :class="{ 'nav-item': true, 'active': $route.path === '/CharacterDetails' }">
-            <router-link class="nav-link" to="/CharacterDetails">Detalle de personajes</router-link>
+            <router-link class="nav-link" to="/CharacterDetails" @click.native="closeMenu">Detalle de personajes</router-link>
+          </li>
+          <li :class="{ 'nav-item': true, 'active': $route.path === '/CharacterFilter' }">
+            <router-link class="nav-link" to="/CharacterFilter" @click.native="closeMenu">Categorías</router-link>
           </li>
           <li class="nav-item" v-if="hasSelectedCharacters">
             <a class="nav-link" @click.prevent="resetSelection" href="#">
@@ -61,6 +72,9 @@ export default {
     handleScroll() {
       this.isFixedTop = window.scrollY > 1;
     },
+    closeMenu() {
+      this.isMenuOpen = false;
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -68,7 +82,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
   }
-}
+};
 </script>
 
 <style scoped>
@@ -105,5 +119,21 @@ export default {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  .fixed-top {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
 }
 </style>

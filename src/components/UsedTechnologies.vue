@@ -3,7 +3,15 @@
     <ul class="tech-list mx-auto text-lg-start">
       <li><h2 class="mb-4">Tecnologías</h2></li>
       <li v-for="techItem in techItems" :key="techItem.text">
-        <i :class="['bx', techItem.icon, 'icon']"></i> {{ techItem.text }}
+        <div class="tech-item">
+          <template v-if="techItem.imageUrl">
+            <img :src="techItem.imageUrl" :alt="techItem.text" class="tech-image" style="width: 30px" />
+            <span class="mx-2">{{ techItem.text }}</span>
+          </template>
+          <template v-else>
+            <i :class="['bx', techItem.icon, 'icon']"></i> {{ techItem.text }}
+          </template>
+        </div>
       </li>
     </ul>
   </div>
@@ -13,7 +21,8 @@
 const techItems = [
   { icon: 'bx bxl-vuejs', text: 'Vue.js 2' },
   { icon: 'bx bx-package', text: 'Boxicons' },
-  { icon: 'bx bxl-bootstrap', text: 'Bootstrap' }
+  { icon: 'bx bxl-bootstrap', text: 'Bootstrap' },
+  { imageUrl: 'https://www.joshsloat.com/uploads/1/2/1/8/12181336/axiosicon-256_1_orig.png', text: 'Axios' }
 ];
 </script>
 
@@ -55,6 +64,11 @@ const techItems = [
 }
 
 .footer-tech {
+  display: flex;
+  align-items: center;
+}
+
+.tech-item {
   display: flex;
   align-items: center;
 }
