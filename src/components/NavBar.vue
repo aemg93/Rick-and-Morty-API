@@ -13,7 +13,7 @@
       >
         <i class="bx bx-menu"></i>
       </button>
-      <div class="mx-5">
+      <div class="mx-3">
         <a href="/">
           <img src="../../public/rick-icon.svg" alt="rick">
         </a>

@@ -140,7 +140,7 @@ export default {
   white-space: nowrap;
   transform: scale(1);
   transition: transform 0.3s ease;
-  color: #fff; /* Color blanco para las fuentes */
+  color: #fff;
 }
 
 .card:hover .card-title {
