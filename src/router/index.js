@@ -1,32 +1,40 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import characterInformation from "@/views/CharacterList.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import CharacterList from '@/views/CharacterList.vue';
 import CharacterDetails from '@/views/CharacterDetails.vue';
+import MiHome from "@/views/MiHome.vue";
+import CharacterFilter from "@/views/CharacterFilter.vue";
 
-Vue.use(VueRouter)
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'character information',
-    component: characterInformation
+    name: 'MiHome',
+    component: MiHome
   },
   {
-    path: '/CharacterList.vue',
+    path: '/characterList',
     name: 'characterList',
-    component: () => import('../views/CharacterList.vue')
+    component: CharacterList
   },
   {
-    path: '/character/:id',
+    path: '/characterDetails',
     name: 'characterDetails',
     component: CharacterDetails
+  },
+  {
+    path: '/characterFilter',
+    name: 'characterFilter',
+    component: CharacterFilter
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
