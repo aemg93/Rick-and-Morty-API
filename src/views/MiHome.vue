@@ -1,7 +1,7 @@
 <template>
   <div class="card mb-5">
     <div class="card-content">
-      <h2 class="title">¡Hola amigos! He creado una aplicación consumiendo la API de Rick and Morty</h2>
+      <h2 class="title">¡Hola amigos! He creado una aplicación consumiendo la <a class="text-decoration-none text-black" href="https://rickandmortyapi.com/">API de Rick and Morty</a> </h2>
       <p class="description">Te invito a echarle un vistazo. Puedes dejar tus comentarios para mejorarla o sugerir nuevas funcionalidades.</p>
       <p class="description">Además, estamos utilizando el almacenamiento Vuex para gestionar los datos en la aplicación.</p>
     </div>
