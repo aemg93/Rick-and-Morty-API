@@ -37,9 +37,15 @@
       </div>
       <button @click="goToNextPage" :disabled="!hasNextPage" class="btn btn-primary btn-sm">&raquo;</button>
     </div>
+
+    <!-- Estilos para el alert -->
+    <div v-if="showAlert" class="alert-container">
+      <div class="alert">
+        {{ alertMessage }}
+      </div>
+    </div>
   </div>
 </template>
-
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
@@ -49,6 +55,9 @@ export default {
     return {
       showDetails: false,
       currentPage: 1,
+      showAlert: false,
+      alertMessage: "",
+      maxCharactersSelected: 3
     };
   },
 
@@ -59,36 +68,38 @@ export default {
   methods: {
     ...mapActions(['loadCharacters', 'toggleCharacterSelection', 'viewCharacterDetails', 'resetSelection']),
     toggleSelection(character) {
-      this.toggleCharacterSelection(character);
+      const isSelected = this.isSelected(character);
+
+      if (isSelected) {
+        this.$store.commit('removeSelectedCharacter', character);
+      } else {
+        if (this.selectedCharacters.length < this.maxCharactersSelected) {
+          this.$store.commit('addSelectedCharacter', character);
+        } else {
+          this.showAlert = true;
+          this.alertMessage = "Solo se pueden seleccionar hasta tres personajes.";
+
+          setTimeout(() => {
+            this.showAlert = false;
+            this.alertMessage = "";
+          }, 1500);
+        }
+      }
     },
+
+
+
     isSelected(character) {
       return this.selectedCharacters.some(c => c.id === character.id);
     },
     viewSelectedDetails() {
       if (this.selectedCharacters.length === 0) {
-        this.showAlert('No has seleccionado ningún personaje.', 'success');
+        this.showAlert = true;
+        this.alertMessage = "No has seleccionado ningún personaje.";
         return;
       }
 
       this.$router.push('/characterDetails');
-    },
-    showAlert(message, style) {
-      const alertElement = document.createElement('div');
-      alertElement.style.backgroundColor = style === 'success' ? '#28a745' : '#dc3545';
-      alertElement.style.color = '#fff';
-      alertElement.style.padding = '10px';
-      alertElement.style.borderRadius = '5px';
-      alertElement.style.position = 'fixed';
-      alertElement.style.top = '50%';
-      alertElement.style.left = '50%';
-      alertElement.style.transform = 'translate(-50%, -50%)';
-      alertElement.innerText = message;
-
-      document.body.appendChild(alertElement);
-
-      setTimeout(() => {
-        document.body.removeChild(alertElement);
-      }, 3000);
     },
     goToPreviousPage() {
       if (this.currentPage > 1) {
@@ -227,5 +238,23 @@ export default {
   .btn {
     font-size: 12px;
   }
+}
+
+.alert-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.alert {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
 }
 </style>
