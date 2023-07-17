@@ -1,19 +1,35 @@
 <template>
   <div class="footer-right px-5 px-sm-0 px-0 d-flex flex-column justify-content-center align-items-center text-center">
     <ul class="social-links m-3">
-      <li><a href="#" class="social-link" :class="{ 'active-hover': showName && networkName === 'Instagram' }" @mouseover="showNetworkName('Instagram')" @mouseleave="hideNetworkName()"><i class='bx bxl-instagram-alt'></i></a></li>
-      <li><a href="#" class="social-link" :class="{ 'active-hover': showName && networkName === 'Facebook' }" @mouseover="showNetworkName('Facebook')" @mouseleave="hideNetworkName()"><i class='bx bxl-facebook-square'></i></a></li>
-      <li><a href="#" class="social-link" :class="{ 'active-hover': showName && networkName === 'Twitter' }" @mouseover="showNetworkName('Twitter')" @mouseleave="hideNetworkName()"><i class='bx bxl-twitter'></i></a></li>
+      <li v-for="(socialLink, index) in socialLinks" :key="index">
+        <a
+            :href="socialLink.url"
+            class="social-link"
+            :class="{ 'active-hover': showName && networkName === socialLink.name }"
+            @mouseover="showNetworkName(socialLink.name)"
+            @mouseleave="hideNetworkName()"
+            target="_blank"
+        >
+          <i :class="socialLink.icon"></i>
+        </a>
+      </li>
     </ul>
     <span class="network-name" :class="{ 'show-network-name': showName }">{{ networkName }}</span>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       showName: false,
       networkName: '',
+      socialLinks: [
+        { name: 'Instagram', icon: 'bx bxl-instagram-alt', url: 'https://www.instagram.com/' },
+        { name: 'Facebook', icon: 'bx bxl-facebook-square', url: 'https://www.facebook.com/profile.php?id=100094839489591' },
+        { name: 'Twitter', icon: 'bx bxl-twitter', url: 'https://twitter.com/' },
+        { name: 'GitHub', icon: 'bx bxl-github', url: 'https://github.com/aemg93' },
+      ],
     };
   },
   methods: {
@@ -27,10 +43,12 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .bx.bxl-instagram-alt,
 .bx.bxl-facebook-square,
-.bx.bxl-twitter {
+.bx.bxl-twitter,
+.bx.bxl-github {
   font-size: 30px;
 }
 
@@ -61,6 +79,13 @@ export default {
   color: #00ACEE;
 }
 
+.social-links li:nth-child(4) a:hover i {
+  color: #000000;
+  background-color: #eef1f6;
+  border: none;
+  border-radius: 50%;
+}
+
 .network-name {
   font-size: 14px;
   font-weight: bold;
@@ -89,7 +114,9 @@ export default {
   .social-links li:nth-child(3) a i {
     color: #00ACEE;
   }
+
+  .social-links li:nth-child(4) a i {
+    color: white;
+  }
 }
-
-
 </style>
