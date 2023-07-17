@@ -25,7 +25,7 @@ export default {
       showName: false,
       networkName: '',
       socialLinks: [
-        { name: 'Instagram', icon: 'bx bxl-instagram-alt', url: 'https://www.instagram.com/' },
+        { name: 'Instagram', icon: 'bx bxl-instagram-alt', url: 'https://www.instagram.com/eliamg93/' },
         { name: 'Facebook', icon: 'bx bxl-facebook-square', url: 'https://www.facebook.com/profile.php?id=100094839489591' },
         { name: 'Twitter', icon: 'bx bxl-twitter', url: 'https://twitter.com/' },
         { name: 'GitHub', icon: 'bx bxl-github', url: 'https://github.com/aemg93' },
