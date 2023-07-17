@@ -127,6 +127,8 @@ export default {
     top: 0;
     width: 100%;
     z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+    
   }
 
   .fixed-top {
