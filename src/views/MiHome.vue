@@ -50,10 +50,17 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
+@media screen and (max-width: 767px){
+  .card {
+    width: 100%;
+    margin-top: 70px;
+  }
+}
 
 .title {
   font-size: 24px;
   margin-bottom: 10px;
+
 }
 
 .description {
