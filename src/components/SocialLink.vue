@@ -1,5 +1,7 @@
 <template>
   <div class="footer-right px-5 px-sm-0 px-0 d-flex flex-column justify-content-center align-items-center text-center">
+    <span class="network-name" :class="{ 'show-network-name': showName }">{{ networkName }}</span>
+
     <ul class="social-links m-3">
       <li v-for="(socialLink, index) in socialLinks" :key="index">
         <a
@@ -14,7 +16,6 @@
         </a>
       </li>
     </ul>
-    <span class="network-name" :class="{ 'show-network-name': showName }">{{ networkName }}</span>
   </div>
 </template>
 
